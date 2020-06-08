@@ -19,7 +19,7 @@ ENV https_proxy=$ARG_HTTPS_PROXY
 ENV no_proxy=$ARG_NO_PROXY
 # Download required env tools
 RUN apt-get update && \
-    apt-get install --yes --no-install-recommends wget git unzip zip vim build-essential python2.7 && \
+    apt-get install --yes --no-install-recommends wget git unzip ssh zip vim build-essential python2.7 && \
     # Change security level as the SAP npm repo doesn't support buster new security upgrade
     # the default configuration for OpenSSL in Buster explicitly requires using more secure ciphers and protocols,
     # and the server running at http://npm.sap.com/ is running software configured to only provide insecure, older ciphers.
