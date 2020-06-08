@@ -11,7 +11,9 @@ ARG ARG_NO_PROXY
 ENV PYTHON /usr/bin/python2.7
 ENV M2_HOME=/opt/maven/apache-maven-${MAVEN_VERSION}
 ENV NODE_HOME=/opt/nodejs
-#Provide proxy environments
+# Provide Runtime env
+ENV PWD=/builds/gitlab/sap-ci-cd-poc/cloud-mta
+# Provide proxy environments
 ENV http_proxy=$ARG_HTTP_PROXY
 ENV https_proxy=$ARG_HTTPS_PROXY
 ENV no_proxy=$ARG_NO_PROXY
