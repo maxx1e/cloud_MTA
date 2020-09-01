@@ -62,6 +62,6 @@ RUN echo "[INFO] install tools and python if needed, otherwise clean." && \
     rm -rf /var/lib/apt/lists/* && \
     echo "[INFO] DONE!"
 ENV PATH=$PATH:./node_modules/.bin HOME=${MTA_USER_HOME}
-COPY --chown=mta:mta create_mta.sh ${MTA_USER_HOME}
 WORKDIR $MTA_USER_HOME
+COPY --chown=mta:mta . .
 USER mta
