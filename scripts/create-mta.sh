@@ -9,7 +9,7 @@ echo >> $filename
 echo "modules:" >> $filename
 echo " - name: ${PRJ_PATH%.*}" >> $filename
 echo "   type: com.sap.hcp.html5" >> $filename
-echo "   path: ./${PRJ_PATH%.*}" >> $filename
+echo "   path: ${CI_PROJECT_DIR}/${PRJ_PATH%.*}" >> $filename
 echo "   parameters:" >> $filename
 echo "    name: ${PRJ_PATH%.*}" >> $filename
 echo "    version: 0.0.1" >> $filename
