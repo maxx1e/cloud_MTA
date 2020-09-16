@@ -19,7 +19,7 @@ ENV https_proxy=$ARG_HTTPS_PROXY
 ENV no_proxy=$ARG_NO_PROXY
 # Download required env tools
 RUN apt-get update && \
-    apt-get install --yes --no-install-recommends wget git unzip ssh zip vim build-essential python2.7 && \
+    apt-get install --yes --no-install-recommends wget git unzip ssh zip vim build-essential python2.7 sudo && \
     # Change security level as the SAP npm repo doesn't support buster new security upgrade
     # the default configuration for OpenSSL in Buster explicitly requires using more secure ciphers and protocols,
     # and the server running at http://npm.sap.com/ is running software configured to only provide insecure, older ciphers.
@@ -53,7 +53,9 @@ RUN echo "[INFO] handle users permission." && \
     # Handle users permission
     useradd --home-dir "${MTA_USER_HOME}" --create-home --shell /bin/bash --user-group --uid 1001 --comment 'Cloud MTA Build Tool' --password "$(echo weUseMta |openssl passwd -1 -stdin)" mta && \
     # Allow anybody to write into the images HOME
-    chmod a+w "${MTA_USER_HOME}"
+    chmod a+w "${MTA_USER_HOME}" && \
+    # Azure hack, Thank you Microsoft.
+    adduser mta sudo
 RUN echo "[INFO] install tools and python if needed, otherwise clean." && \
     # Install essential build tools and python, required for building db modules
     # apt-get install --yes --no-install-recommends build-essential python2.7 && \
