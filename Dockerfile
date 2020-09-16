@@ -51,7 +51,7 @@ RUN echo "[INFO] Download MBT $MBT_VERSION." && \
     chown root:root /usr/local/bin/mbt
 RUN echo "[INFO] handle users permission." && \
     # Handle users permission
-    useradd --home-dir "${MTA_USER_HOME}" --create-home --shell /bin/bash --user-group --uid 1000 --comment 'Cloud MTA Build Tool' --password "$(echo weUseMta |openssl passwd -1 -stdin)" mta && \
+    useradd --home-dir "${MTA_USER_HOME}" --create-home --shell /bin/bash --user-group --uid 1001 --comment 'Cloud MTA Build Tool' --password "$(echo weUseMta |openssl passwd -1 -stdin)" mta && \
     # Allow anybody to write into the images HOME
     chmod a+w "${MTA_USER_HOME}"
 RUN echo "[INFO] install tools and python if needed, otherwise clean." && \
