@@ -61,3 +61,4 @@ RUN apt-get update && \
 
 ENV PATH=$PATH:./node_modules/.bin HOME=${MTA_USER_HOME}
 WORKDIR /project
+USER mta
