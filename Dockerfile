@@ -55,7 +55,7 @@ RUN apt-get update && \
          # allow anybody to write into the images HOME
          chmod a+w "${MTA_USER_HOME}" && \
          usermod -aG sudo mta && \
-         echo >> 'mta ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers && \
+         echo >> 'mta ALL=(ALL:ALL) NOPASSWD:ALL' >> /etc/sudoers && \
          apt-get remove --purge --autoremove --yes curl && \
          rm -rf /var/lib/apt/lists/*
 
