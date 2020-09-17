@@ -33,7 +33,7 @@ RUN apt-get update && \
      npm install --prefix /usr/local/ -g @ui5/cli && \
 
     # Update Maven home
-     M2_BASE="$(dirname ${M2_HOME})" && \
+    M2_BASE="$(dirname ${M2_HOME})" && \
     mkdir -p "${M2_BASE}" && \
     curl --fail --silent --output - "https://apache.osuosl.org/maven/maven-3/${MAVEN_VERSION}/binaries/apache-maven-${MAVEN_VERSION}-bin.tar.gz" \
     | tar -xzvf - -C "${M2_BASE}" && \
@@ -53,7 +53,10 @@ RUN apt-get update && \
                  --comment 'Cloud MTA Build Tool' \
                  --password "$(echo weUseMta |openssl passwd -1 -stdin)" mta && \
          # allow anybody to write into the images HOME
-         chmod a+w "${MTA_USER_HOME}" && \
+         chmod a+w "${MTA_USER_HOME}" &&\
+       apt-get remove --purge --autoremove --yes \
+       curl && \
+       rm -rf /var/lib/apt/lists/*
 
 ENV PATH=$PATH:./node_modules/.bin HOME=${MTA_USER_HOME}
 WORKDIR /project
