@@ -56,10 +56,8 @@ RUN apt-get update && \
          chmod a+w "${MTA_USER_HOME}" && \
          usermod -aG sudo mta && \
          echo >> 'mta ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers && \
-         chmod 0440 /etc/sudoers.d/user && \
-         apt-get remove --purge --autoremove --yes \
-       curl && \
-       rm -rf /var/lib/apt/lists/*
+         apt-get remove --purge --autoremove --yes curl && \
+         rm -rf /var/lib/apt/lists/*
 
 ENV PATH=$PATH:./node_modules/.bin HOME=${MTA_USER_HOME}
 WORKDIR /project
