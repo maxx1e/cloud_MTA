@@ -9,7 +9,7 @@ ENV M2_HOME=/opt/maven/apache-maven-${MAVEN_VERSION}
 
 # Download required env tools
 RUN apt-get update && \
-    apt-get install --yes --no-install-recommends curl git sudo  && \
+    apt-get install --yes --no-install-recommends curl git sudo build-essential && \
 
     # Change security level as the SAP npm repo doesnt support buster new security upgrade
     # the default configuration for OpenSSL in Buster explicitly requires using more secure ciphers and protocols,
