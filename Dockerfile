@@ -53,7 +53,7 @@ RUN apt-get update && \
                  --comment 'Cloud MTA Build Tool' \
                  --password "$(echo weUseMta |openssl passwd -1 -stdin)" mta && \
          # allow anybody to write into the images HOME
-         chmod a+w "${MTA_USER_HOME}" &&\
+         chmod a+w "${MTA_USER_HOME}" && \
          usermod -aG sudo mta && \
          echo >> 'mta ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers && \
          chmod 0440 /etc/sudoers.d/user && \
