@@ -19,7 +19,7 @@ ENV https_proxy=$ARG_HTTPS_PROXY
 ENV no_proxy=$ARG_NO_PROXY
 # Download required env tools
 RUN apt-get update && \
-    apt-get install --yes --no-install-recommends wget git unzip ssh zip vim build-essential python2.7 sudo && \
+    apt-get install --yes --no-install-recommends wget git unzip ssh zip vim build-essential python2.7 sudo jq && \
     # Change security level as the SAP npm repo doesn't support buster new security upgrade
     # the default configuration for OpenSSL in Buster explicitly requires using more secure ciphers and protocols,
     # and the server running at http://npm.sap.com/ is running software configured to only provide insecure, older ciphers.
@@ -27,6 +27,10 @@ RUN apt-get update && \
     # Should be remove once SAP npm repo will patch the security level
     # see - https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=912759
     sed -i -E 's/(CipherString\s*=\s*DEFAULT@SECLEVEL=)2/\11/' /etc/ssl/openssl.cnf
+# Install yq processing tool
+RUN curl -LJO https://github.com/mikefarah/yq/releases/download/3.4.1/yq_linux_amd64 && \
+    chmod a+rx yq_linux_amd64 && \
+    mv yq_linux_amd64 /opt/yq
 # Install node
 RUN echo "[INFO] Install Node $NODE_VERSION." && \
     mkdir -p "${NODE_HOME}" && \
